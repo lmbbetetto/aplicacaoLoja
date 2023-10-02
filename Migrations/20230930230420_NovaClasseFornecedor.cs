@@ -16,10 +16,10 @@ namespace aplicacaoLoja.Migrations
                 {
                     id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    nome = table.Column<string>(type: "nvarchar(35)", maxLength: 35, nullable: false),
-                    telefone = table.Column<string>(type: "nvarchar(1)", nullable: false),
-                    endereco = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    cnpj = table.Column<string>(type: "nvarchar(1)", nullable: false)
+                    nome = table.Column<string>(type: "nvarchar(35)", maxLength: 35),
+                    telefone = table.Column<string>(type: "nvarchar()"),
+                    endereco = table.Column<string>(type: "nvarchar(50)", maxLength: 50),
+                    cnpj = table.Column<string>(type: "nvarchar(30)")
                 },
                 constraints: table =>
                 {

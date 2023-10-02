@@ -10,14 +10,15 @@ namespace aplicacaoLoja.Models
         [Key]
         public int id { get; set; }
 
+
+
         
-        [StringLength(35)]
         public char nome { get; set; }
 
         
         public char telefone { get; set; }
 
-        [StringLength(50)]
+       
         public char endereco { get; set; }
 
       
