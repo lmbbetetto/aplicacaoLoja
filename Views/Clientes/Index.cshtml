@@ -1,0 +1,49 @@
+﻿@model IEnumerable<aplicacaoLoja.Models.Cliente>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Lista de Clientes</h1>
+<br/>
+<div class="form-group">
+    <a asp-action="Create"><input type="submit" value="Novo Cliente" class="btn btn-primary bg-success border-0" /></a>
+</div>
+<br/>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.nome)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.telefone)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.cpf)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.nome)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.telefone)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.cpf)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.id"><input type="submit" value="Editar" class="btn btn-primary bg-warning text-dark border-0" /></a> |
+                <a asp-action="Details" asp-route-id="@item.id"><input type="submit" value="Detalhar" class="btn btn-primary border-0" /></a> |
+                <a asp-action="Delete" asp-route-id="@item.id"><input type="submit" value="Excluir" class="btn btn-primary bg-danger border-0" /></a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

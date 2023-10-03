@@ -8,5 +8,6 @@ namespace aplicacaoLoja.Models
 
         public DbSet<Categoria> Categorias { get; set; }
         public DbSet<Funcionario> Funcionarios { get; set; }
+        public DbSet<Cliente> Clientes { get; set; }
     }
 }
