@@ -15,13 +15,24 @@ namespace aplicacaoLoja.Models
         public string nome { get; set; }
 
         [Required(ErrorMessage = "Campo obrigatório")]
+        [DataType(DataType.EmailAddress, ErrorMessage = "Email inválido")]
+        [StringLength(40)]
+        [Display(Name = "Email")]
+        public string email { get; set; }
+
+        [Required(ErrorMessage = "Campo obrigatório")]
         [StringLength(14)]
         [Display(Name = "Telefone")]
         public string telefone { get; set; }
 
         [Required(ErrorMessage = "Campo obrigatório")]
         [StringLength(14)]
-        [Display(Name = "Cpf")] 
+        [Display(Name = "Cpf")]
         public string cpf { get; set; }
+
+        [Required(ErrorMessage = "Campo obrigatório")]
+        [DisplayFormat(DataFormatString = "{0:C0}", ApplyFormatInEditMode = true)]
+        [Display(Name = "Salário")]
+        public double salario { get; set; }
     }
 }
