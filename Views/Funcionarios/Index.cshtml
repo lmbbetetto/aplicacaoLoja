@@ -2,13 +2,15 @@
 
 @{
     ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Index</h1>
-
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
+<h1>Lista Funcionários</h1>
+<br />
+<div class="form-group">
+    <a asp-action="Create"><input type="submit" value="Novo Funcionário" class="btn btn-primary bg-success border-0" /></a>
+</div>
+<br />
 <table class="table">
     <thead>
         <tr>
@@ -16,10 +18,16 @@
                 @Html.DisplayNameFor(model => model.nome)
             </th>
             <th>
+                @Html.DisplayNameFor(model => model.email)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.telefone)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.cpf)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.salario)
             </th>
             <th></th>
         </tr>
@@ -31,16 +39,22 @@
                 @Html.DisplayFor(modelItem => item.nome)
             </td>
             <td>
+                @Html.DisplayFor(modelItem => item.email)
+            </td>
+            <td>
                 @Html.DisplayFor(modelItem => item.telefone)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.cpf)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.id">Delete</a>
+                @Html.DisplayFor(modelItem => item.salario)
             </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.id"><input type="submit" value="Editar" class="btn btn-primary bg-warning text-dark border-0" /></a> |
+                    <a asp-action="Details" asp-route-id="@item.id"><input type="submit" value="Detalhar" class="btn btn-primary border-0" /></a> |
+                    <a asp-action="Delete" asp-route-id="@item.id"><input type="submit" value="Excluir" class="btn btn-primary bg-danger border-0" /></a>
+                </td>
         </tr>
 }
     </tbody>

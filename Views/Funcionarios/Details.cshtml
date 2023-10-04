@@ -2,10 +2,12 @@
 
 @{
     ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Details</h1>
-
+<h1>Detalhar</h1>
+<br />
+<br />
 <div>
     <h4>Funcionario</h4>
     <hr />
@@ -15,6 +17,12 @@
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.nome)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.email)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.email)
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.telefone)
@@ -28,9 +36,16 @@
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.cpf)
         </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.salario)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.salario)
+        </dd>
     </dl>
 </div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model?.id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+<br />
+<div class="form-group">
+    <a asp-action="Edit" asp-route-id="@Model?.id"><input value="Editar" class="btn btn-primary bg-success border-0 " style="width: 6rem" /></a> |
+    <a asp-action="Index"><input value="Voltar" class="btn btn-primary bg-warning text-dark border-0 " style="width: 6rem" /></a>
 </div>
