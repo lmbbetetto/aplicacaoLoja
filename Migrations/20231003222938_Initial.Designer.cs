@@ -11,8 +11,8 @@ using aplicacaoLoja.Models;
 namespace aplicacaoLoja.Migrations
 {
     [DbContext(typeof(Contexto))]
-    [Migration("20231003010902_Cliente")]
-    partial class Cliente
+    [Migration("20231003222938_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -23,6 +23,24 @@ namespace aplicacaoLoja.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+
+            modelBuilder.Entity("aplicacaoLoja.Models.Categoria", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"));
+
+                    b.Property<string>("descricao")
+                        .IsRequired()
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)");
+
+                    b.HasKey("id");
+
+                    b.ToTable("Categorias");
+                });
 
             modelBuilder.Entity("aplicacaoLoja.Models.Cliente", b =>
                 {
@@ -50,6 +68,34 @@ namespace aplicacaoLoja.Migrations
                     b.HasKey("id");
 
                     b.ToTable("Clientes");
+                });
+
+            modelBuilder.Entity("aplicacaoLoja.Models.Funcionario", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"));
+
+                    b.Property<string>("cpf")
+                        .IsRequired()
+                        .HasMaxLength(14)
+                        .HasColumnType("nvarchar(14)");
+
+                    b.Property<string>("nome")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("telefone")
+                        .IsRequired()
+                        .HasMaxLength(14)
+                        .HasColumnType("nvarchar(14)");
+
+                    b.HasKey("id");
+
+                    b.ToTable("Funcionarios");
                 });
 #pragma warning restore 612, 618
         }

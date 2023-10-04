@@ -39,6 +39,34 @@ namespace aplicacaoLoja.Migrations
                     b.ToTable("Categorias");
                 });
 
+            modelBuilder.Entity("aplicacaoLoja.Models.Cliente", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"));
+
+                    b.Property<string>("cpf")
+                        .IsRequired()
+                        .HasMaxLength(14)
+                        .HasColumnType("nvarchar(14)");
+
+                    b.Property<string>("nome")
+                        .IsRequired()
+                        .HasMaxLength(60)
+                        .HasColumnType("nvarchar(60)");
+
+                    b.Property<string>("telefone")
+                        .IsRequired()
+                        .HasMaxLength(15)
+                        .HasColumnType("nvarchar(15)");
+
+                    b.HasKey("id");
+
+                    b.ToTable("Clientes");
+                });
+
             modelBuilder.Entity("aplicacaoLoja.Models.Funcionario", b =>
                 {
                     b.Property<int>("id")
@@ -54,7 +82,6 @@ namespace aplicacaoLoja.Migrations
 
                     b.Property<string>("nome")
                         .IsRequired()
-
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
@@ -66,7 +93,6 @@ namespace aplicacaoLoja.Migrations
                     b.HasKey("id");
 
                     b.ToTable("Funcionarios");
-
                 });
 #pragma warning restore 612, 618
         }
