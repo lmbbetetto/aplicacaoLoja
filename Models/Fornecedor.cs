@@ -16,7 +16,7 @@ namespace aplicacaoLoja.Models
         public string nome { get; set; }
 
         [Required(ErrorMessage = "Campo obrigatório")]
-        [StringLength(12)]
+        [StringLength(15)]
         [Display(Name = "Telefone")]
         public string telefone { get; set; }
 
@@ -26,7 +26,7 @@ namespace aplicacaoLoja.Models
         public string endereco { get; set; }
 
         [Required(ErrorMessage = "Campo obrigatório")]
-        [StringLength(14)]
+        [StringLength(18)]
         [Display(Name = "Cnpj")]
         public string cnpj { get; set; }
 
