@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using aplicacaoLoja.Models;
 
@@ -10,9 +11,11 @@ using aplicacaoLoja.Models;
 namespace aplicacaoLoja.Migrations
 {
     [DbContext(typeof(Contexto))]
-    partial class ContextoModelSnapshot : ModelSnapshot
+    [Migration("20231007135222_a")]
+    partial class a
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -134,59 +137,6 @@ namespace aplicacaoLoja.Migrations
                     b.HasKey("id");
 
                     b.ToTable("Funcionarios");
-                });
-
-            modelBuilder.Entity("aplicacaoLoja.Models.Produto", b =>
-                {
-                    b.Property<int>("id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"));
-
-                    b.Property<int>("categoriaID")
-                        .HasColumnType("int");
-
-                    b.Property<string>("descricao")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<int>("fornecedorID")
-                        .HasColumnType("int");
-
-                    b.Property<double>("preco")
-                        .HasColumnType("float");
-
-                    b.Property<int>("qtdeEstoque")
-                        .HasColumnType("int");
-
-                    b.HasKey("id");
-
-                    b.HasIndex("categoriaID");
-
-                    b.HasIndex("fornecedorID");
-
-                    b.ToTable("Produtos");
-                });
-
-            modelBuilder.Entity("aplicacaoLoja.Models.Produto", b =>
-                {
-                    b.HasOne("aplicacaoLoja.Models.Categoria", "categoria")
-                        .WithMany()
-                        .HasForeignKey("categoriaID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("aplicacaoLoja.Models.Fornecedor", "fornecedor")
-                        .WithMany()
-                        .HasForeignKey("fornecedorID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("categoria");
-
-                    b.Navigation("fornecedor");
                 });
 #pragma warning restore 612, 618
         }

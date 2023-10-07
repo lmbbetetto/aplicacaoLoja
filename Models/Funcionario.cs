@@ -31,7 +31,6 @@ namespace aplicacaoLoja.Models
         public string cpf { get; set; }
 
         [Required(ErrorMessage = "Campo obrigatório")]
-        [DisplayFormat(DataFormatString = "{0:C0}", ApplyFormatInEditMode = true)]
         [Display(Name = "Salário")]
         public double salario { get; set; }
     }
