@@ -102,7 +102,7 @@ namespace aplicacaoLoja.Controllers
             }
 
             if (ModelState.IsValid)
-            {
+            { 
                 try
                 {
                     _context.Update(produto);
