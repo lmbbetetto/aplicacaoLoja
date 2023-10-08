@@ -34,6 +34,20 @@
                          <li class="nav-item">
                             <a class="nav-link text-light" asp-area="" asp-controller="Fornecedores" asp-action="Index">Fornecedores</a>
                         </li>
+
+                        <div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
+                            <ul class="navbar-nav">
+                                <li class="nav-item dropdown">
+                                    <button class="btn btn-dark dropdown-toggle bg-transparent border-0" data-bs-toggle="dropdown" aria-expanded="false">
+                                        Produtos
+                                    </button>
+                                    <ul class="dropdown-menu dropdown-menu-light">
+                                        <a class="nav-link text-dark" asp-area="" asp-controller="Produtos" asp-action="Index">Lista de Produtos</a>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+
                     </ul>
                 </div>
             </div>
