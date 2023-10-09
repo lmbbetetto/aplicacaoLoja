@@ -167,7 +167,22 @@ namespace aplicacaoLoja.Controllers
 
         private bool ProdutoExists(int id)
         {
-          return _context.Produtos.Any(e => e.id == id);
+            return _context.Produtos.Any(e => e.id == id);
+        }
+
+        // POST: Produto/IncrementarQuantidade
+        [HttpPost]
+        public IActionResult IncrementarQuantidade(CompraProduto compraProduto)
+        {
+            var produto = _context.Produtos.Find(compraProduto.produtoID);
+
+            if (produto != null)
+            {
+                produto.qtdeEstoque += compraProduto.qtdeEstoque;
+                _context.SaveChanges();
+            }
+            return RedirectToAction("Index", "Produtos");
         }
     }
 }
+

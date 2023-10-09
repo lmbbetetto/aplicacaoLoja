@@ -1,14 +1,15 @@
 ﻿@model IEnumerable<aplicacaoLoja.Models.Fornecedor>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Lista de Fornecedores";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <h1>Lista de Fornecedores</h1>
 <br/>
 <div class="form-group">
-    <a asp-action="Create"><input type="submit" value="Novo Fornecedor" class="btn btn-primary bg-success border-0" /></a>
+    <a asp-action="Create"><input type="submit" value="Novo Fornecedor" class="btn btn-primary bg-success border-0" /></a> | 
+    <a asp-controller="CompraProdutos" asp-action="Create"><input type="submit" value="Nova Compra" class="btn btn-primary bg-warning border-0 text-dark" /></a>
 </div>
 <br/>
 <table class="table">
