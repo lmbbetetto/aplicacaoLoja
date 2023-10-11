@@ -1,4 +1,4 @@
-﻿@model aplicacaoLoja.Models.Produto
+﻿@model aplicacaoLoja.Models.Venda
 
 @{
     ViewData["Title"] = "Details";
@@ -7,38 +7,38 @@
 <h1>Details</h1>
 
 <div>
-    <h4>Produto</h4>
+    <h4>Venda</h4>
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.descricao)
+            @Html.DisplayNameFor(model => model.data)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.descricao)
+            @Html.DisplayFor(model => model.data)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.preco)
+            @Html.DisplayNameFor(model => model.total)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.preco)
+            @Html.DisplayFor(model => model.total)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.qtdeEstoque)
+            @Html.DisplayNameFor(model => model.cliente)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.qtdeEstoque)
+            @Html.DisplayFor(model => model.cliente.nome)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.categoria)
+            @Html.DisplayNameFor(model => model.funcionario)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.categoria.descricao)
+            @Html.DisplayFor(model => model.funcionario.nome)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.fornecedor)
+            @Html.DisplayNameFor(model => model.vendaProdutoID)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.fornecedor.cnpj)
+            @Html.DisplayFor(model => model.vendaProdutoID)
         </dd>
     </dl>
 </div>

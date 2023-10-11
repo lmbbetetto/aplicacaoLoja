@@ -1,4 +1,4 @@
-﻿@model IEnumerable<aplicacaoLoja.Models.Produto>
+﻿@model IEnumerable<aplicacaoLoja.Models.Venda>
 
 @{
     ViewData["Title"] = "Index";
@@ -13,19 +13,19 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.descricao)
+                @Html.DisplayNameFor(model => model.data)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.preco)
+                @Html.DisplayNameFor(model => model.total)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.qtdeEstoque)
+                @Html.DisplayNameFor(model => model.cliente)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.categoria)
+                @Html.DisplayNameFor(model => model.funcionario)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.fornecedor)
+                @Html.DisplayNameFor(model => model.vendaProdutoID)
             </th>
             <th></th>
         </tr>
@@ -34,19 +34,19 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.descricao)
+                @Html.DisplayFor(modelItem => item.data)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.preco)
+                @Html.DisplayFor(modelItem => item.total)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.qtdeEstoque)
+                @Html.DisplayFor(modelItem => item.cliente.nome)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.categoria.descricao)
+                @Html.DisplayFor(modelItem => item.funcionario.nome)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.fornecedor.cnpj)
+                @Html.DisplayFor(modelItem => item.vendaProdutoID)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.id">Edit</a> |

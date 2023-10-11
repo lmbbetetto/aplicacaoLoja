@@ -16,7 +16,7 @@ namespace aplicacaoLoja.Models
 
         [Required(ErrorMessage = "Campo obrigatório")]
         [Display(Name = "Preço")]
-        public double preco { get; set; }
+        public decimal preco { get; set; }
 
         [Required(ErrorMessage = "Campo obrigatório")]
         [Display(Name = "Qtde Estoque")]

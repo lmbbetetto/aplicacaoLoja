@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using aplicacaoLoja.Models;
 
@@ -11,9 +12,11 @@ using aplicacaoLoja.Models;
 namespace aplicacaoLoja.Migrations
 {
     [DbContext(typeof(Contexto))]
-    partial class ContextoModelSnapshot : ModelSnapshot
+    [Migration("20231011194238_venda")]
+    partial class venda
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -177,8 +180,8 @@ namespace aplicacaoLoja.Migrations
                     b.Property<int>("fornecedorID")
                         .HasColumnType("int");
 
-                    b.Property<decimal>("preco")
-                        .HasColumnType("decimal(18,2)");
+                    b.Property<double>("preco")
+                        .HasColumnType("float");
 
                     b.Property<int>("qtdeEstoque")
                         .HasColumnType("int");
@@ -209,8 +212,8 @@ namespace aplicacaoLoja.Migrations
                     b.Property<int>("funcionarioID")
                         .HasColumnType("int");
 
-                    b.Property<decimal>("total")
-                        .HasColumnType("decimal(18,2)");
+                    b.Property<double>("total")
+                        .HasColumnType("float");
 
                     b.Property<int>("vendaProdutoID")
                         .HasColumnType("int");
