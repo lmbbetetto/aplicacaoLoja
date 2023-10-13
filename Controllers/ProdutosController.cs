@@ -49,7 +49,7 @@ namespace aplicacaoLoja.Controllers
         public IActionResult Create()
         {
             ViewData["categoriaID"] = new SelectList(_context.Categorias, "id", "descricao");
-            ViewData["fornecedorID"] = new SelectList(_context.Fornecedores, "id", "cnpj");
+            ViewData["fornecedorID"] = new SelectList(_context.Fornecedores, "id", "nome");
             return View();
         }
 
@@ -67,7 +67,7 @@ namespace aplicacaoLoja.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["categoriaID"] = new SelectList(_context.Categorias, "id", "descricao", produto.categoriaID);
-            ViewData["fornecedorID"] = new SelectList(_context.Fornecedores, "id", "cnpj", produto.fornecedorID);
+            ViewData["fornecedorID"] = new SelectList(_context.Fornecedores, "id", "nome", produto.fornecedorID);
             return View(produto);
         }
 
@@ -85,7 +85,7 @@ namespace aplicacaoLoja.Controllers
                 return NotFound();
             }
             ViewData["categoriaID"] = new SelectList(_context.Categorias, "id", "descricao", produto.categoriaID);
-            ViewData["fornecedorID"] = new SelectList(_context.Fornecedores, "id", "cnpj", produto.fornecedorID);
+            ViewData["fornecedorID"] = new SelectList(_context.Fornecedores, "id", "nome", produto.fornecedorID);
             return View(produto);
         }
 
@@ -122,7 +122,7 @@ namespace aplicacaoLoja.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["categoriaID"] = new SelectList(_context.Categorias, "id", "descricao", produto.categoriaID);
-            ViewData["fornecedorID"] = new SelectList(_context.Fornecedores, "id", "cnpj", produto.fornecedorID);
+            ViewData["fornecedorID"] = new SelectList(_context.Fornecedores, "id", "nome", produto.fornecedorID);
             return View(produto);
         }
 
@@ -168,6 +168,20 @@ namespace aplicacaoLoja.Controllers
         private bool ProdutoExists(int id)
         {
           return _context.Produtos.Any(e => e.id == id);
+        }
+
+        // POST: Produto/IncrementarQuantidade
+        [HttpPost]
+        public IActionResult IncrementarQuantidade(CompraProduto compraProduto)
+        {
+            var produto = _context.Produtos.Find(compraProduto.produtoID);
+
+            if (produto != null)
+            {
+                produto.qtdeEstoque += compraProduto.qtdeEstoque;
+                _context.SaveChanges();
+            }
+            return RedirectToAction("Index", "Produtos");
         }
     }
 }
