@@ -15,6 +15,5 @@ namespace aplicacaoLoja.Models
         public DbSet<Produto> Produtos { get; set; }
         public DbSet<CompraProduto> CompraProdutos { get; set; }
         public DbSet<Venda> Vendas { get; set; }
-        public DbSet<VendaProduto> VendaProduto { get; set; }
     }
 }

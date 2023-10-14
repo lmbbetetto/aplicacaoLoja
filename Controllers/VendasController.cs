@@ -21,7 +21,7 @@ namespace aplicacaoLoja.Controllers
         // GET: Vendas
         public async Task<IActionResult> Index()
         {
-            var contexto = _context.Vendas.Include(v => v.cliente).Include(v => v.funcionario);
+            var contexto = _context.Vendas.Include(v => v.cliente).Include(v => v.funcionario).Include(v => v.produto);
             return View(await contexto.ToListAsync());
         }
 
@@ -36,6 +36,7 @@ namespace aplicacaoLoja.Controllers
             var venda = await _context.Vendas
                 .Include(v => v.cliente)
                 .Include(v => v.funcionario)
+                .Include(v => v.produto)
                 .FirstOrDefaultAsync(m => m.id == id);
             if (venda == null)
             {
@@ -50,6 +51,7 @@ namespace aplicacaoLoja.Controllers
         {
             ViewData["clienteID"] = new SelectList(_context.Clientes, "id", "nome");
             ViewData["funcionarioID"] = new SelectList(_context.Funcionarios, "id", "nome");
+            ViewData["produtoID"] = new SelectList(_context.Produtos, "id", "descricao");
             return View();
         }
 
@@ -58,16 +60,24 @@ namespace aplicacaoLoja.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("id,data,total,clienteID,funcionarioID,vendaProdutoID")] Venda venda)
+        public async Task<IActionResult> Create([Bind("id,data,clienteID,funcionarioID,produtoID,quantidade,total")] Venda venda)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(venda);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                Produto produto = _context.Produtos.Find(venda.produtoID);
+
+                if (produto != null)
+                {
+                    produto.atualizarEstoque(venda.quantidade);
+                    venda.total = produto.calcularTotal(venda.quantidade);
+                    _context.Add(venda);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
+                }
             }
             ViewData["clienteID"] = new SelectList(_context.Clientes, "id", "nome", venda.clienteID);
             ViewData["funcionarioID"] = new SelectList(_context.Funcionarios, "id", "nome", venda.funcionarioID);
+            ViewData["produtoID"] = new SelectList(_context.Produtos, "id", "descricao", venda.produtoID);
             return View(venda);
         }
 
@@ -86,6 +96,7 @@ namespace aplicacaoLoja.Controllers
             }
             ViewData["clienteID"] = new SelectList(_context.Clientes, "id", "nome", venda.clienteID);
             ViewData["funcionarioID"] = new SelectList(_context.Funcionarios, "id", "nome", venda.funcionarioID);
+            ViewData["produtoID"] = new SelectList(_context.Produtos, "id", "descricao", venda.produtoID);
             return View(venda);
         }
 
@@ -94,7 +105,7 @@ namespace aplicacaoLoja.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("id,data,total,clienteID,funcionarioID,vendaProdutoID")] Venda venda)
+        public async Task<IActionResult> Edit(int id, [Bind("id,data,clienteID,funcionarioID,produtoID,quantidade,total")] Venda venda)
         {
             if (id != venda.id)
             {
@@ -105,8 +116,25 @@ namespace aplicacaoLoja.Controllers
             {
                 try
                 {
-                    _context.Update(venda);
-                    await _context.SaveChangesAsync();
+                    Venda vendaExistente = _context.Vendas.Find(venda.id);
+
+                    if (vendaExistente != null)
+                    {
+                        _context.Entry(vendaExistente).State = EntityState.Detached;
+
+                        _context.Entry(venda).State = EntityState.Modified;
+
+                        Produto produto = _context.Produtos.Find(venda.produtoID);
+                        int qtdeVenda = vendaExistente.quantidade;
+                        venda.total = produto.calcularTotal(venda.quantidade);
+
+                        if (produto != null)
+                        {
+                            produto.atualizarEstoque(venda.quantidade - qtdeVenda);
+                        }
+
+                        await _context.SaveChangesAsync();
+                    }
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -123,6 +151,7 @@ namespace aplicacaoLoja.Controllers
             }
             ViewData["clienteID"] = new SelectList(_context.Clientes, "id", "nome", venda.clienteID);
             ViewData["funcionarioID"] = new SelectList(_context.Funcionarios, "id", "nome", venda.funcionarioID);
+            ViewData["produtoID"] = new SelectList(_context.Produtos, "id", "descricao", venda.produtoID);
             return View(venda);
         }
 
@@ -137,6 +166,7 @@ namespace aplicacaoLoja.Controllers
             var venda = await _context.Vendas
                 .Include(v => v.cliente)
                 .Include(v => v.funcionario)
+                .Include(v => v.produto)
                 .FirstOrDefaultAsync(m => m.id == id);
             if (venda == null)
             {

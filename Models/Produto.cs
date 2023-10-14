@@ -31,5 +31,19 @@ namespace aplicacaoLoja.Models
         [ForeignKey("fornecedorID")]
         [Display(Name = "Fornecedor")]
         public Fornecedor fornecedor { get; set; }
+
+        public void atualizarEstoque(int qtde)
+        {
+            if (this.qtdeEstoque >= qtde)
+                this.qtdeEstoque -= qtde;
+            else
+                throw new Exception("Estoque insuficiente!");
+        }
+
+        public decimal calcularTotal(int qtde)
+        {
+            decimal total = qtde * this.preco;
+            return total;
+        }
     }
 }
