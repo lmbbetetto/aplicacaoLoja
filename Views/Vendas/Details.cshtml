@@ -1,11 +1,12 @@
 ﻿@model aplicacaoLoja.Models.Venda
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Detalhar";
 }
 
-<h1>Details</h1>
-
+<h1>Detalhar</h1>
+<br />
+<br />
 <div>
     <h4>Venda</h4>
     <hr />
@@ -48,7 +49,8 @@
         </dd>
     </dl>
 </div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model?.id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+<br />
+<div class="form-group">
+    <a asp-action="Edit" asp-route-id="@Model?.id"><input value="Editar" class="btn btn-primary bg-success border-0 " style="width: 6rem" /></a> |
+    <a asp-action="Index"><input value="Voltar" class="btn btn-primary bg-warning text-dark border-0 " style="width: 6rem" /></a>
 </div>
